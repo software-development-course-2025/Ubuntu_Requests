@@ -2,21 +2,27 @@ import os
 import requests
 from urllib.parse import urlparse
 
+MAX_FILE_SIZE = 10_000_000  # 10MB
+
+def is_valid_image_response(response):
+    content_type = response.headers.get("Content-Type", "")
+    if not content_type.startswith("image/"):
+        print(f"✗ Skipped: Not an image ({content_type})")
+        return False
+
+    content_length = response.headers.get("Content-Length")
+    if content_length and int(content_length) > MAX_FILE_SIZE:
+        print(f"✗ Skipped: Image too large ({int(content_length)/1_000_000:.2f} MB)")
+        return False
+
+    return True
+
 def fetch_image(image_url):
     try:
         response = requests.get(image_url, timeout=10)
         response.raise_for_status()
 
-        # Check if Content-Type is image/*
-        content_type = response.headers.get("Content-Type", "")
-        if not content_type.startswith("image/"):
-            print(f"✗ Skipped: URL does not point to an image ({content_type})")
-            return
-
-        # Optional: Check for large files (>10MB for example)
-        content_length = response.headers.get("Content-Length")
-        if content_length and int(content_length) > 10_000_000:
-            print(f"✗ Skipped: Image too large ({int(content_length)/1_000_000:.2f} MB)")
+        if not is_valid_image_response(response):
             return
 
         parsed = urlparse(image_url)
@@ -37,6 +43,4 @@ def fetch_image(image_url):
     except requests.exceptions.RequestException as e:
         print(f"✗ Failed to fetch image: {e}")
     except Exception as e:
-        print(f"✗ Unexpected error: {e}")
-
-de
+        print(f"✗ Un
