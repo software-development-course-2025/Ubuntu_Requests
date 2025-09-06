@@ -18,6 +18,17 @@ A simple tool for respectfully fetching and organizing images from the internet.
 python ubuntu_image_fetcher.py
 ```
 
+## Output Example 
+
+Welcome to the Ubuntu Image Fetcher  
+A tool for mindfully collecting images from the web
+
+Please enter the image URL: https://example.com/ubuntu-wallpaper.jpg  
+✓ Successfully fetched: ubuntu-wallpaper.jpg  
+✓ Image saved to Fetched_Images/ubuntu-wallpaper.jpg
+
+Connection strengthened. Community enriched.
+
 ## 🌍 Ubuntu Principles
 
 - **Community:** Connects respectfully with the internet
@@ -27,7 +38,7 @@ python ubuntu_image_fetcher.py
 
 ## 👤 Author
 
-Developed by **Augusto Mate** as part of the Software Development Course 2025.  
+Developed by **Augusto Mate** as part of the _Software Development Course 2025._  
 GitHub: [https://github.com/augusto047](https://github.com/augusto047)
 
 ## 📄 License
