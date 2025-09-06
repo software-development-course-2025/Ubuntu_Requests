@@ -11,6 +11,10 @@ def fetch_image(image_url):
         filename = os.path.basename(parsed.path) or "image.jpg"
         file_path = os.path.join("Fetched_Images", filename)
 
+        if os.path.exists(file_path):
+            print(f"↪ Skipped (already exists): {filename}")
+            return
+
         with open(file_path, "wb") as f:
             f.write(response.content)
 
