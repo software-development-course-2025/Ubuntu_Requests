@@ -43,4 +43,19 @@ def fetch_image(image_url):
     except requests.exceptions.RequestException as e:
         print(f"✗ Failed to fetch image: {e}")
     except Exception as e:
-        print(f"✗ Un
+        print(f"✗ Unexpected error: {e}")
+
+def main():
+    print("Welcome to the Ubuntu Image Fetcher")
+    print("A tool for mindfully collecting images from the web\n")
+
+    urls_input = input("Please enter image URLs separated by commas: ")
+    image_urls = [url.strip() for url in urls_input.split(",")]
+
+    os.makedirs("Fetched_Images", exist_ok=True)
+
+    for url in image_urls:
+        fetch_image(url)
+
+if __name__ == "__main__":
+    main()
