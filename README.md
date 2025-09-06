@@ -25,3 +25,16 @@ python ubuntu_image_fetcher.py
 - **Sharing:** Stores content for future appreciation
 - **Practicality:** Solves a real need with a simple tool
 
+## 👤 Author
+
+Developed by **Augusto Mate** as part of the Software Development Course 2025.  
+GitHub: [https://github.com/augusto047](https://github.com/augusto047)
+
+## 📄 License
+
+This project is licensed under the **MIT License**. 
+See the [LICENSE](LICENSE) file for details.
+
+---
+
+ℹ Project created with mindful respect, community spirit, and practical simplicity — inspired by Ubuntu.
