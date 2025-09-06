@@ -7,6 +7,18 @@ def fetch_image(image_url):
         response = requests.get(image_url, timeout=10)
         response.raise_for_status()
 
+        # Check if Content-Type is image/*
+        content_type = response.headers.get("Content-Type", "")
+        if not content_type.startswith("image/"):
+            print(f"✗ Skipped: URL does not point to an image ({content_type})")
+            return
+
+        # Optional: Check for large files (>10MB for example)
+        content_length = response.headers.get("Content-Length")
+        if content_length and int(content_length) > 10_000_000:
+            print(f"✗ Skipped: Image too large ({int(content_length)/1_000_000:.2f} MB)")
+            return
+
         parsed = urlparse(image_url)
         filename = os.path.basename(parsed.path) or "image.jpg"
         file_path = os.path.join("Fetched_Images", filename)
@@ -27,17 +39,4 @@ def fetch_image(image_url):
     except Exception as e:
         print(f"✗ Unexpected error: {e}")
 
-def main():
-    print("Welcome to the Ubuntu Image Fetcher")
-    print("A tool for mindfully collecting images from the web\n")
-
-    urls_input = input("Please enter image URLs separated by commas: ")
-    image_urls = [url.strip() for url in urls_input.split(",")]
-
-    os.makedirs("Fetched_Images", exist_ok=True)
-
-    for url in image_urls:
-        fetch_image(url)
-
-if __name__ == "__main__":
-    main()
+de
